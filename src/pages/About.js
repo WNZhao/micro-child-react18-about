@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { aboutApi } from '../api/about';
+import './About.scss';
 
 function About() {
   const [aboutContent, setAboutContent] = useState('');
@@ -26,16 +27,19 @@ function About() {
   }, []);
 
   if (loading) {
-    return <div>加载中...</div>;
+    return <div className="about-container">加载中...</div>;
   }
 
   if (error) {
-    return <div>错误：{error}</div>;
+    return <div className="about-container">错误：{error}</div>;
   }
 
   return (
     <div className="about-container">
-      <h1>关于我们</h1>
+      <div className="about-header">
+        <h1>关于「DOSS直聘」</h1>
+        <div className="subtitle">科技的未来，招聘的未来</div>
+      </div>
       <div className="about-content">
         {aboutContent.split('\n\n').map((paragraph, index) => (
           <p key={index}>{paragraph}</p>

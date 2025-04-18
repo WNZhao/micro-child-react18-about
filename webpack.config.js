@@ -15,7 +15,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
+    library: 'microChildReact18About',
+    libraryTarget: 'umd',
+    chunkLoadingGlobal: 'webpackJsonp_microChildReact18About',
+    globalObject: 'window'
   },
   module: {
     rules: [
@@ -33,17 +37,13 @@ module.exports = {
         test: /\.(css|scss|sass)$/,
         use: [
           'style-loader',
-          'css-loader',
           {
-            loader: 'sass-loader',
+            loader: 'css-loader',
             options: {
-              // 如果需要引入全局变量或 mixin
-              additionalData: `
-                @import "src/styles/variables.scss";
-                @import "src/styles/mixins.scss";
-              `
+              importLoaders: 2
             }
-          }
+          },
+          'sass-loader'
         ]
       },
       {
