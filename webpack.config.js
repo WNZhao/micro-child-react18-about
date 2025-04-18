@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-04-18 14:48:19
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
- * @LastEditTime: 2025-04-18 15:08:22
+ * @LastEditTime: 2025-04-18 17:08:41
  * @FilePath: /micro-child-react18-about/webpack.config.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -30,8 +30,21 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.(css|scss|sass)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              // 如果需要引入全局变量或 mixin
+              additionalData: `
+                @import "src/styles/variables.scss";
+                @import "src/styles/mixins.scss";
+              `
+            }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
@@ -56,7 +69,7 @@ module.exports = {
       }
     }),
     new webpack.DefinePlugin({
-      'process.env.PUBLIC_URL': JSON.stringify('')
+      'process.env.REACT_APP_API_URL': JSON.stringify(process.env.REACT_APP_API_URL || '/api')
     })
   ],
   devServer: {
@@ -75,10 +88,10 @@ module.exports = {
     },
     proxy: [{
       context: ['/api'],
-      target: 'http://localhost:3000',
+      target: 'http://127.0.0.1:4523/m1/6248890-5942815-default',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': ''
+        '^/api': '/api'
       }
     }]
   }
