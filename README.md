@@ -1,3 +1,89 @@
+# micro-child-react18-about
+
+基于 React 18 的微前端子应用，支持独立运行和作为子应用运行。
+
+## 项目结构
+
+```
+micro-child-react18-about/
+├── public/                 # 静态资源目录
+├── src/                    # 源代码目录
+│   ├── components/         # 公共组件
+│   │   └── Layout/        # 布局组件
+│   ├── pages/             # 页面组件
+│   │   └── About/         # 关于页面
+│   ├── styles/            # 样式文件
+│   │   └── global.scss    # 全局样式
+│   ├── utils/             # 工具函数
+│   │   └── request.js     # 请求封装
+│   ├── App.js             # 应用入口组件
+│   ├── index.js           # 应用入口文件
+│   └── public-path.js     # 微前端环境配置
+├── .env                    # 环境变量
+├── package.json           # 项目依赖配置
+└── README.md              # 项目说明文档
+```
+
+## 功能特性
+
+- 支持独立运行和作为微前端子应用运行
+- 基于 React 18 开发
+- 使用 SCSS 进行样式管理
+- 封装 Axios 请求工具
+- 支持环境变量配置
+
+## 关键实现
+
+### 微前端适配
+
+1. 通过 `public-path.js` 配置 webpack publicPath，支持独立运行和微前端环境
+2. 使用 `window.__MICRO_APP_ENVIRONMENT__` 判断运行环境
+3. 支持 qiankun 微前端框架
+
+### 请求封装
+
+1. 基于 Axios 封装请求工具
+2. 支持请求/响应拦截
+3. 统一的错误处理
+4. 支持 token 认证
+
+### 样式管理
+
+1. 使用 SCSS 预处理器
+2. 模块化的样式组织
+3. 全局样式统一管理
+
+## 开发指南
+
+### 安装依赖
+
+```bash
+npm install
+```
+
+### 开发模式
+
+```bash
+npm start
+```
+
+### 构建生产版本
+
+```bash
+npm run build
+```
+
+## 环境变量
+
+- `REACT_APP_API_URL`: API 基础地址
+- `REACT_APP_PUBLIC_PATH`: 公共路径
+
+## 注意事项
+
+1. 确保主应用已正确配置微前端环境
+2. 子应用需要配置正确的 publicPath
+3. 注意样式隔离和冲突处理
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
